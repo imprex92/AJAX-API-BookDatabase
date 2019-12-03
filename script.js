@@ -1,0 +1,1 @@
+const apiUrl = 'https://www.forverkliga.se/JavaScript/api/crud.php?requestKey'
