@@ -2,6 +2,7 @@
 <html lang="en" dir="ltr">
 
 <head>
+    <meta name="viewport" content="width=device-width">
     <link rel="stylesheet" href="style.css">
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"
         integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
@@ -12,16 +13,35 @@
 
 <body>
     
+    <div id="container">
     
-    <header>
-        <div class="btnDiv">
-        <button id="getKey">Get API-Key</button>
-        </div>
-    </header>
+        <section id="header">
+                        
+            <h1>Welcome to the new book-database</h1>            
+            <button id="getKey">Get API-Key</button>
+            <label for="getKey">Here your personal key will apear</label>
+            
+        </section>
 
+        <section id="mainSection">
+            <form action="" method="post">
+                
+                <label for="titleInput">Book Title: </label>                
+                <input type="text" placeholder="Enter Book Title" name="Title" id="titleInput">
+                
+                <label for="authorInput">Book Author: </label>
+                <input type="text" placeholder="Enter Author" name="Author" id="authorInput">
+                
+                <button type="submit">Add Book</button>
+                <!-- <input type="submit" value="Submit"> -->
+            </form>
+        </section>
 
+        <section id="footer">
 
+        </section>
 
+    </div>
 </body>
 
 </html>

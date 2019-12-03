@@ -1,9 +1,40 @@
-#getKey{
-    
+body{
+    background-color: rgba(0, 0, 0, 0.5);
 }
-.btnDiv{
-    background-color: cadetblue;
-    right: 40px;
+#container{
+    width: 80%;
+    margin: auto;
+    background-color: cadetblue;    
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+#header{
+    /* display: flex;
+    justify-content: center; */
+    align-content: center;
+    align-items: center;
+    text-align: center;
+}
+#getKey{
+    padding: 15px 32px;
+    background-color: powderblue;    
+    top: 50%;
+    right: 50%;
+}
+#mainSection form label{
+padding: 0px 20px;
+}
+#mainSection form input{
+    width: 15%;
+}
+form{
     display: flex;
     justify-content: center;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10px 0px 10px;
+}
+#mainSection form button{
+    margin: 10px;
 }
