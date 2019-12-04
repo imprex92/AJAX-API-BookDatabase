@@ -17,10 +17,15 @@
     
         <section id="header">
                         
-            <h1>Welcome to the new book-database</h1>            
-            <button id="getKey">Get API-Key</button>
-            <label for="getKey">Here your personal key will apear</label>
-            
+            <h1>Welcome to the new book-database</h1> 
+            <span>           
+                <button id="getKey">
+                    Get API-Key
+                </button>
+                <div id="getKeyLabel" >
+                    Personal Key:
+                </div>
+            </span>
         </section>
 
         <section id="mainSection">
@@ -32,9 +37,13 @@
                 <label for="authorInput">Book Author: </label>
                 <input type="text" placeholder="Enter Author" name="Author" id="authorInput">
                 
-                <button type="submit">Add Book</button>
+                <button type="button" id="createBookBtn">Add Book</button>
                 <!-- <input type="submit" value="Submit"> -->
             </form>
+        </section>
+
+        <section>
+            <!-- Section for all books that are added -->
         </section>
 
         <section id="footer">
