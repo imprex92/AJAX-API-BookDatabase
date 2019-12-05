@@ -6,7 +6,16 @@ const noKeyUrl = 'https://www.forverkliga.se/JavaScript/api/crud.php?'; //! "req
 
     // Wait for load
     window.addEventListener('load', () => {
-        
+                    //TODO LocalStorage!
+                    //! LocalStorage !\\ 
+
+
+
+
+
+
+
+
         const getAPIKey = document.querySelector('#getKey');
         
         getAPIKey.addEventListener('click', async e => {
@@ -51,11 +60,13 @@ const noKeyUrl = 'https://www.forverkliga.se/JavaScript/api/crud.php?'; //! "req
                     console.log(addBookSvar);
                     if(addDataResp.status === 'success'){
                         console.log('Wohooo! Your addBook request was accepted!');
+                        //* Anropar funktion *1
+                        createAddBook();
                         break;
                     }else{
-                        console.log('Ohh nooo! What have you done to upset the server?! Your addBook request was not accepted!', addDataResp, '<br> try#: ' + tryNo);
+                        console.log('Ohh nooo! What have you done to upset the server?! Your addBook request was not accepted!', addDataResp, '\n try#: ' + tryNo);
                         tryNo++;
-                    }
+                    };
                     
                 };
             
@@ -67,4 +78,23 @@ const noKeyUrl = 'https://www.forverkliga.se/JavaScript/api/crud.php?'; //! "req
 
 
     });
+    //*1
+    function createAddBook() {
+        //* Skapar ett DIV element
+        let createBookDiv = document.createElement('div');
+        
+        // createAddBookAddPicture();
+        //* Ger den skapade DIV'en en klass  
+        createBookDiv.className = 'thisBook';
+        //* Lägger till text i skapad DIV
+        createBookDiv.innerText = 'Book Title: ' + (titleInput.value) + '\n Book Author: ' + (authorInput.value);
+        // createBookDiv.innerText = 'Book Author: ' +  (authorInput.value); //*
+        //*Lägger till det ovan inne i 'bookSection' elementet
+        document.getElementById('bookSection').appendChild(createBookDiv);
 
+        let bookImg = document.createElement('img');
+        bookImg.setAttribute('src', 'https://cdn.pixabay.com/photo/2015/10/22/17/28/stack-of-books-1001655_1280.jpg');
+        bookImg.setAttribute('alt', 'Book Template');
+        createBookDiv.appendChild(bookImg);
+    } //*1
+    //TODO Lägg till egen bild?  function createAddBookAddPicture(){}
