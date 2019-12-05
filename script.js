@@ -40,8 +40,6 @@ const noKeyUrl = 'https://www.forverkliga.se/JavaScript/api/crud.php?'; //! "req
             const createBookBtn = document.querySelector('#createBookBtn');
             const titleInput = document.querySelector('#titleInput');
             const authorInput = document.querySelector('#authorInput');
-            let titleInputValue = titleInput.value;
-            let authorInputValue = authorInput.value;
             //! Skapa addEventListener så när du klickat på "Add book" knappen ska en "CreateBook" function kallas
             let tryNo = 0;
             createBookBtn.addEventListener('click', async event => {
@@ -66,22 +64,28 @@ const noKeyUrl = 'https://www.forverkliga.se/JavaScript/api/crud.php?'; //! "req
                     }else{
                         console.log('Ohh nooo! What have you done to upset the server?! Your addBook request was not accepted!', addDataResp, '\n try#: ' + tryNo);
                         tryNo++;
-                    }; //* if()
+                    }; //* if() End
                     
-                }; //* for()
+                }; //* for() End
             
-            }); //* EventListener CreateBook 
+            }); //* EventListener CreateBook End
 
             const logInBtn = document.querySelector('#logIn');
-            const logInInput = document.querySelector('')
+            const logInInput = document.querySelector('#logInValue');
+            
+            const viewBookUrl = noKeyUrl + 'key=' + logInInput.value + '&op=select';
+            console.log(viewBookUrl);
             logInBtn.addEventListener('click', async event => {
+                let viewBookSvar = await fetch(viewBookUrl);
+                let viewBookResp = await viewBookSvar.json();
+                console.log('Svar från server evter JOSN convertering', viewBookResp)
+                console.log('din nyckel för viewBook', logInInput.value)
+            }); //* EventListener loginSection End
 
-            }); //* EventListener loginSection
 
 
 
-
-    }); //* Window load
+    }); //* Window load End
     
     
     
