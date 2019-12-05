@@ -41,6 +41,7 @@ body{
     padding-top: 5%;
     padding-bottom: 5%;
 }
+                                /* Header Area Beginning */
 #header{
     align-content: center;
     align-items: center;
@@ -79,4 +80,28 @@ form{
 }
 #mainSection form button{
     margin: 10px;
+}
+
+                                /* Header Area End */
+                                /* Booksection Area Beginning */
+
+#bookSection{
+    display: grid;
+    grid-template-columns: repeat(16, 1fr);
+    grid-gap: 12px;
+}
+.book1{
+    grid-column: span 5;
+    background-color: blue;
+    color: white;
+}
+.book2{
+    grid-column: span 5;
+    background-color: green;
+    color: white;
+}
+.book3 {
+    grid-column: span 5;
+    background-color: green;
+    color: white;
 }
