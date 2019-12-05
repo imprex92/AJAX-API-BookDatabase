@@ -66,18 +66,26 @@ const noKeyUrl = 'https://www.forverkliga.se/JavaScript/api/crud.php?'; //! "req
                     }else{
                         console.log('Ohh nooo! What have you done to upset the server?! Your addBook request was not accepted!', addDataResp, '\n try#: ' + tryNo);
                         tryNo++;
-                    };
+                    }; //* if()
                     
-                };
+                }; //* for()
             
-            });
+            }); //* EventListener CreateBook 
+
+            const logInBtn = document.querySelector('#logIn');
+            const logInInput = document.querySelector('')
+            logInBtn.addEventListener('click', async event => {
+
+            }); //* EventListener loginSection
 
 
 
 
-
-
-    });
+    }); //* Window load
+    
+    
+    
+    
     //*1
     function createAddBook() {
         //* Skapar ett DIV element
@@ -98,3 +106,7 @@ const noKeyUrl = 'https://www.forverkliga.se/JavaScript/api/crud.php?'; //! "req
         createBookDiv.appendChild(bookImg);
     } //*1
     //TODO Lägg till egen bild?  function createAddBookAddPicture(){}
+
+    function viewBook(myKey){
+
+    }
