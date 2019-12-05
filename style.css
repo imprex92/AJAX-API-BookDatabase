@@ -31,6 +31,10 @@
   }
 ] */
 
+img{
+    object-fit: cover;
+    width: 100%
+}
 body{
     background-color: rgba(0, 0, 0, 0.5);
 }
@@ -57,6 +61,12 @@ body{
     align-items: center;
     text-align: center;
     justify-content: center;
+}
+#logIn{
+    padding: 15px 32px;
+    background-color: powderblue;
+    top: 50%;
+    right: 50%;
 }
 #getKey{
     padding: 15px 32px;
@@ -101,6 +111,11 @@ form{
     color: white;
 }
 .book3 {
+    grid-column: span 5;
+    background-color: green;
+    color: white;
+}
+.thisBook{
     grid-column: span 5;
     background-color: green;
     color: white;
