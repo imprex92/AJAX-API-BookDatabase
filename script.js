@@ -43,11 +43,16 @@ const noKeyUrl = 'https://www.forverkliga.se/JavaScript/api/crud.php?'; //! "req
             const titleInput = document.querySelector('#titleInput');
             const authorInput = document.querySelector('#authorInput');
             //! Skapa addEventListener så när du klickat på "Add book" knappen ska en "CreateBook" function kallas
+            let errormessage = document.querySelector("#errormessage");
             let tryNo = 1;
             let errorCount = 0;
+            let noSuccess = 'Try again'
+            
             createBookBtn.addEventListener('click', async event => {
                 //TODO for() loop om något går fel + counter antal försök (MAX 5 försök) + break
                 let errorList =[];
+                              
+                errormessage.innerHTML = "";
                 for( let i=0; i<6; i++ ){
                     //! använder och klistrar in: Personliga nyckeln, lägger till det användaren skrev in i fältet TITEL och AUTHOR i länken som kommer skickas till servern för att lägga till en bok.
                     const addBookUrl = noKeyUrl + 'key=' + respDataKey + '&op=insert&title=' + titleInput.value + '&author=' + authorInput.value; //!
@@ -57,6 +62,7 @@ const noKeyUrl = 'https://www.forverkliga.se/JavaScript/api/crud.php?'; //! "req
                     console.log(addBookSvar);
                     console.log('We have tried to add your book. Answer from server: ' + addBookSvar + '(before JSON convertion');
                     let addDataResp = await addBookSvar.json(); //! Converting...
+                    // let addDataRespMessage = addDataResp.message
                     console.log('answer JSON converted result: ', addDataResp);
                     console.log('Bokens ID: ', addDataResp.id);
                     console.log(addBookSvar);
@@ -66,19 +72,23 @@ const noKeyUrl = 'https://www.forverkliga.se/JavaScript/api/crud.php?'; //! "req
                         messages.innerText += '\n Try# ' + tryNo + ' ' + 'Bok tillagd.'
                         //* Anropar funktion *1
                         createAddBook();
-                        messages = document.getElementById('messages')
-                        messages.innerText = 'Didnt it work? Maybe you can see a errorcode her: '; 
+                        // messages = document.getElementById('messages')
+                        // messages.innerText = 'Didnt it work? Maybe you can see a errorcode her: '; 
                         tryNo = 1;
                         break;
                     }else{
                         console.log('Ohh nooo! What have you done to upset the server?! Your addBook request was not accepted!', addDataResp, '\n try#: ' + tryNo);
                         let messages = document.getElementById('messages')
-                        messages.innerText += '\n Try# ' + tryNo + ' ' + addDataResp.message;
+                        messages.innerText += '\n Try# ' + tryNo + ' ' + errorList.push(addDataResp.message);
                         tryNo++;
+                            if( tryNo === 5){
+                                errorList.push(noSuccess)
+
+                            }; //* if() End
                     }; //* if() End
                     
                 }; //* for() End
-            
+            errorReportingService(errorList);
             }); //* EventListener CreateBook End
 
             const logInBtn = document.querySelector('#logIn');
@@ -169,6 +179,15 @@ const noKeyUrl = 'https://www.forverkliga.se/JavaScript/api/crud.php?'; //! "req
         
     };
 
+    function errorReportingService(listError){
+        for (let x = 0; x < listError.length; x++){
+            let errorTry = document.createElement('li');
+            errorTry.className = 'errorTry';
+            errorTry.innerHTML = listError[x];
+            errormessage.appendChild(errorTry);
+
+        };
+    };
 
     function deleteBook(){
 
