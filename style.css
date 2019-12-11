@@ -30,7 +30,9 @@
     "backgroundColor": "transparent"
   }
 ] */
+#errorReporting{
 
+}
 img{
     object-fit: cover;
     width: 100%
@@ -119,4 +121,76 @@ form{
     grid-column: span 5;
     background-color: green;
     color: white;
+}
+
+@media screen and (max-width: 962px){   /* 3st columner med böcker. Ändra flex columns till flex row */
+    #bookSection {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        grid-gap: 5px;
+    }
+
+    .book1 {
+        grid-column: span 2;
+        background-color: blue;
+        color: white;
+    }
+
+    .book2 {
+        grid-column: span 2;
+        background-color: green;
+        color: white;
+    }
+
+    .book3 {
+        grid-column: span 2;
+        background-color: green;
+        color: white;
+    }
+
+    .thisBook {
+        grid-column: span 2;
+        background-color: green;
+        color: white;
+    }
+}
+
+
+
+
+
+@media screen and (max-width: 700px){   /* 2st columner med böcker. Ändra flex columns till flex row.  */
+    #container{
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+    #bookSection{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 5px;
+    }
+    .book1 {
+        grid-column: span 2;
+        background-color: blue;
+        color: white;
+    }
+
+    .book2 {
+        grid-column: span 2;
+        background-color: green;
+        color: white;
+    }
+
+    .book3 {
+        grid-column: span 2;
+        background-color: green;
+        color: white;
+    }
+
+    .thisBook {
+        grid-column: span 2;
+        background-color: green;
+        color: white;
+    }
 }

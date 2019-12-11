@@ -1,4 +1,5 @@
 let respDataKey = 'A119f';
+let myTestKey = 'W22Rj';
 const apiUrl = 'https://www.forverkliga.se/JavaScript/api/crud.php?requestKey';
 const noKeyUrl = 'https://www.forverkliga.se/JavaScript/api/crud.php?'; //! "requestKey" fattas här. Efter här ska nyckeln läggas till.
 
@@ -34,6 +35,7 @@ const noKeyUrl = 'https://www.forverkliga.se/JavaScript/api/crud.php?'; //! "req
             document.getElementById('getKeyLabel').innerText = 'Personal Key: ' +
                 respDataKey; //! Skriver ut nyckeln för användaren. HÄR LIGGER NYCKELN!
                 console.log(respDataKey)
+                myTestKey = respData.data
         });
             
             //TODO Create book Section
@@ -41,9 +43,11 @@ const noKeyUrl = 'https://www.forverkliga.se/JavaScript/api/crud.php?'; //! "req
             const titleInput = document.querySelector('#titleInput');
             const authorInput = document.querySelector('#authorInput');
             //! Skapa addEventListener så när du klickat på "Add book" knappen ska en "CreateBook" function kallas
-            let tryNo = 0;
+            let tryNo = 1;
+            let errorCount = 0;
             createBookBtn.addEventListener('click', async event => {
                 //TODO for() loop om något går fel + counter antal försök (MAX 5 försök) + break
+                let errorList =[];
                 for( let i=0; i<6; i++ ){
                     //! använder och klistrar in: Personliga nyckeln, lägger till det användaren skrev in i fältet TITEL och AUTHOR i länken som kommer skickas till servern för att lägga till en bok.
                     const addBookUrl = noKeyUrl + 'key=' + respDataKey + '&op=insert&title=' + titleInput.value + '&author=' + authorInput.value; //!
@@ -58,11 +62,18 @@ const noKeyUrl = 'https://www.forverkliga.se/JavaScript/api/crud.php?'; //! "req
                     console.log(addBookSvar);
                     if(addDataResp.status === 'success'){
                         console.log('Wohooo! Your addBook request was accepted!');
+                        let messages = document.getElementById('messages')
+                        messages.innerText += '\n Try# ' + tryNo + ' ' + 'Bok tillagd.'
                         //* Anropar funktion *1
                         createAddBook();
+                        messages = document.getElementById('messages')
+                        messages.innerText = 'Didnt it work? Maybe you can see a errorcode her: '; 
+                        tryNo = 1;
                         break;
                     }else{
                         console.log('Ohh nooo! What have you done to upset the server?! Your addBook request was not accepted!', addDataResp, '\n try#: ' + tryNo);
+                        let messages = document.getElementById('messages')
+                        messages.innerText += '\n Try# ' + tryNo + ' ' + addDataResp.message;
                         tryNo++;
                     }; //* if() End
                     
@@ -73,13 +84,24 @@ const noKeyUrl = 'https://www.forverkliga.se/JavaScript/api/crud.php?'; //! "req
             const logInBtn = document.querySelector('#logIn');
             const logInInput = document.querySelector('#logInValue');
             
-            const viewBookUrl = noKeyUrl + 'key=' + logInInput.value + '&op=select';
-            console.log(viewBookUrl);
+            
             logInBtn.addEventListener('click', async event => {
+                myTestKey = logInInput.value
+                const viewBookUrl = noKeyUrl + 'key=' + myTestKey + '&op=select';
+                console.log(viewBookUrl);
+                console.log('key written', logInInput.value)
                 let viewBookSvar = await fetch(viewBookUrl);
                 let viewBookResp = await viewBookSvar.json();
-                console.log('Svar från server evter JOSN convertering', viewBookResp)
-                console.log('din nyckel för viewBook', logInInput.value)
+                console.log('Svar från server efter JOSN konvertering', viewBookResp);
+                let viewBookArray = viewBookResp.data;
+                console.log(viewBookArray);
+                console.log('din nyckel för viewBook', logInInput.value);
+                if(viewBookResp.status === 'success'){
+                    console.log('Success! Welcome user: ', logInInput.value, +'.');
+                    viewBook(viewBookArray)
+                }else{
+                    console.log('Failed to recognise key', viewBookResp.status);
+                };
             }); //* EventListener loginSection End
 
 
@@ -108,9 +130,50 @@ const noKeyUrl = 'https://www.forverkliga.se/JavaScript/api/crud.php?'; //! "req
         bookImg.setAttribute('src', 'https://cdn.pixabay.com/photo/2015/10/22/17/28/stack-of-books-1001655_1280.jpg');
         bookImg.setAttribute('alt', 'Book Template');
         createBookDiv.appendChild(bookImg);
-    } //*1
+
+        //? Tanken här är att lägga in en knapp ti div'en. Ändra och ta bort.
+        //! Klar.
+        let deleteButton = document.createElement('button');
+        let editButton = document.createElement('button');
+        deleteButton.className = 'deleteButton';
+        editButton.className = 'editButton';
+        deleteButton.innerText = 'Remove Book from List';
+        editButton.innerText = 'Edit this Book';
+        document.getElementById('bookSection').appendChild(deleteButton);
+        document.getElementById('bookSection').appendChild(editButton);
+        //? behövs quarySelector här innan addEventeListener???
+        //? Behövs async på addEventeListener???
+        
+        deleteButton.addEventListener('click', async e => {
+            deleteBook()
+        }); //* deleteButton addEventeListener end.
+        editButton.addEventListener('click', async e => {
+            editButton()
+        }); //* editButton addEventeListener end.
+    
+    
+    }; //*1
     //TODO Lägg till egen bild?  function createAddBookAddPicture(){}
 
-    function viewBook(myKey){
+    function viewBook(viewBookArray){
+        
+        viewBookArray.forEach(book => {
+            console.log(book.title);
+            let createBookDiv = document.createElement('div');
+            createBookDiv.className = 'thisBook';
+            createBookDiv.innerText = 'Title: ' + book.title + '\n Author: ' + book.author //TODO När arrayen kommer ska värderna, Titel och Author skrivas ut i createBookDiv som i tidigare funktion.
 
-    }
+
+            document.getElementById('bookSection').appendChild(createBookDiv);
+        });
+        
+    };
+
+
+    function deleteBook(){
+
+    };
+    function editBook(){
+        
+    };
+
