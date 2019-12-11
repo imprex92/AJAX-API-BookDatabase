@@ -53,7 +53,7 @@ const noKeyUrl = 'https://www.forverkliga.se/JavaScript/api/crud.php?'; //! "req
                 let errorList =[];
                               
                 errormessage.innerHTML = "";
-                for( let i=0; i<6; i++ ){
+                for( let i=0; i<5; i++ ){
                     //! använder och klistrar in: Personliga nyckeln, lägger till det användaren skrev in i fältet TITEL och AUTHOR i länken som kommer skickas till servern för att lägga till en bok.
                     const addBookUrl = noKeyUrl + 'key=' + respDataKey + '&op=insert&title=' + titleInput.value + '&author=' + authorInput.value; //!
                     console.log('This is the URL you are trying to send: ' + addBookUrl);
@@ -68,8 +68,8 @@ const noKeyUrl = 'https://www.forverkliga.se/JavaScript/api/crud.php?'; //! "req
                     console.log(addBookSvar);
                     if(addDataResp.status === 'success'){
                         console.log('Wohooo! Your addBook request was accepted!');
-                        let messages = document.getElementById('messages')
-                        messages.innerText += '\n Try# ' + tryNo + ' ' + 'Bok tillagd.'
+                        // let messages = document.getElementById('messages')
+                        // messages.innerText += '\n Try# ' + tryNo + ' ' + 'Bok tillagd.'
                         //* Anropar funktion *1
                         createAddBook();
                         // messages = document.getElementById('messages')
@@ -78,13 +78,14 @@ const noKeyUrl = 'https://www.forverkliga.se/JavaScript/api/crud.php?'; //! "req
                         break;
                     }else{
                         console.log('Ohh nooo! What have you done to upset the server?! Your addBook request was not accepted!', addDataResp, '\n try#: ' + tryNo);
-                        let messages = document.getElementById('messages')
-                        messages.innerText += '\n Try# ' + tryNo + ' ' + errorList.push(addDataResp.message);
+                        // let messages = document.getElementById('messages')
+                        // messages.innerText += '\n Try# ' + tryNo + ' ' + 
+                        errorList.push(addDataResp.message);
                         tryNo++;
-                            if( tryNo === 5){
-                                errorList.push(noSuccess)
+                            // if( tryNo === 5){
+                            //     errorList.push(noSuccess)
 
-                            }; //* if() End
+                            // }; //* if() End
                     }; //* if() End
                     
                 }; //* for() End
@@ -114,7 +115,15 @@ const noKeyUrl = 'https://www.forverkliga.se/JavaScript/api/crud.php?'; //! "req
                 };
             }); //* EventListener loginSection End
 
-
+            function errorReportingService(listError) {
+                for (let x = 0; x < listError.length; x++) {
+                    let errorTry = document.createElement('li');
+                    errorTry.className = 'errorTry';
+                    errorTry.innerHTML = listError[x];
+                    errormessage.appendChild(errorTry);
+                        console.log(listError)
+                };
+            };
 
 
     }); //* Window load End
@@ -179,15 +188,7 @@ const noKeyUrl = 'https://www.forverkliga.se/JavaScript/api/crud.php?'; //! "req
         
     };
 
-    function errorReportingService(listError){
-        for (let x = 0; x < listError.length; x++){
-            let errorTry = document.createElement('li');
-            errorTry.className = 'errorTry';
-            errorTry.innerHTML = listError[x];
-            errormessage.appendChild(errorTry);
-
-        };
-    };
+    
 
     function deleteBook(){
 
