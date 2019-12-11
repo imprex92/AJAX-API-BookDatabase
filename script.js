@@ -45,7 +45,7 @@ const noKeyUrl = 'https://www.forverkliga.se/JavaScript/api/crud.php?'; //! "req
             //! Skapa addEventListener så när du klickat på "Add book" knappen ska en "CreateBook" function kallas
             let errormessage = document.querySelector("#errormessage");
             let tryNo = 1;
-            let errorCount = 0;
+            let onSuccess = 'Book added!'
             let noSuccess = 'Try again'
             
             createBookBtn.addEventListener('click', async event => {
@@ -74,22 +74,22 @@ const noKeyUrl = 'https://www.forverkliga.se/JavaScript/api/crud.php?'; //! "req
                         createAddBook();
                         // messages = document.getElementById('messages')
                         // messages.innerText = 'Didnt it work? Maybe you can see a errorcode her: '; 
+                        errorList.push('Try# ' + tryNo + ' ' + onSuccess);
                         tryNo = 1;
                         break;
                     }else{
                         console.log('Ohh nooo! What have you done to upset the server?! Your addBook request was not accepted!', addDataResp, '\n try#: ' + tryNo);
                         // let messages = document.getElementById('messages')
                         // messages.innerText += '\n Try# ' + tryNo + ' ' + 
-                        errorList.push(addDataResp.message);
+                        errorList.push('Try# ' + tryNo + ' ' + addDataResp.message);
                         tryNo++;
-                            // if( tryNo === 5){
-                            //     errorList.push(noSuccess)
-
-                            // }; //* if() End
+                            if( tryNo === 5){
+                                errorList.push('Try# ' + tryNo + ' ' + noSuccess);
+                            }; //* if() End
                     }; //* if() End
                     
                 }; //* for() End
-            errorReportingService(errorList);
+            errorReportingServices(errorList);
             }); //* EventListener CreateBook End
 
             const logInBtn = document.querySelector('#logIn');
@@ -115,14 +115,15 @@ const noKeyUrl = 'https://www.forverkliga.se/JavaScript/api/crud.php?'; //! "req
                 };
             }); //* EventListener loginSection End
 
-            function errorReportingService(listError) {
-                for (let x = 0; x < listError.length; x++) {
-                    let errorTry = document.createElement('li');
+            function errorReportingServices(listError) {
+                // for (let x = 0; x < listError.length; x++) {
+                    
+                    errorTry = document.createElement('li');
                     errorTry.className = 'errorTry';
-                    errorTry.innerHTML = listError[x];
+                    errorTry.innerHTML = listError[listError.length - 1]
                     errormessage.appendChild(errorTry);
                         console.log(listError)
-                };
+                // };
             };
 
 
@@ -184,6 +185,10 @@ const noKeyUrl = 'https://www.forverkliga.se/JavaScript/api/crud.php?'; //! "req
 
 
             document.getElementById('bookSection').appendChild(createBookDiv);
+            let bookImg = document.createElement('img');
+            bookImg.setAttribute('src', 'https://cdn.pixabay.com/photo/2015/10/22/17/28/stack-of-books-1001655_1280.jpg');
+            bookImg.setAttribute('alt', 'Book Template');
+            createBookDiv.appendChild(bookImg);
         });
         
     };
