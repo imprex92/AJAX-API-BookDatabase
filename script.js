@@ -6,21 +6,11 @@ const noKeyUrl = 'https://www.forverkliga.se/JavaScript/api/crud.php?'; //! "req
     // js Vanilla 
 
     // Wait for load
-    window.addEventListener('load', () => {
-                    //TODO LocalStorage!
-                    //! LocalStorage !\\ 
-
-
-
-
-
-
-
-
-        const getAPIKey = document.querySelector('#getKey');
-        
+    window.addEventListener('load', () => { 
+        const getAPIKey = document.querySelector('#getKey');        
         getAPIKey.addEventListener('click', async e => {
             //TODO knappen ska bli disabled 
+            document.querySelector('#getKey').disabled = true;
             // När man trycker på knappen skickar man en förfrågan till servern
             // servern svarar
             const response = await fetch(apiUrl);
@@ -47,11 +37,11 @@ const noKeyUrl = 'https://www.forverkliga.se/JavaScript/api/crud.php?'; //! "req
             let tryNo = 1;
             let onSuccess = 'Book added!'
             let noSuccess = 'Try again'
-            
+            let onViewSuccess = 'You are in!';
+            let noViewSuccess = 'Try again!'
             createBookBtn.addEventListener('click', async event => {
                 //TODO for() loop om något går fel + counter antal försök (MAX 5 försök) + break
-                let errorList =[];
-                              
+                let errorList =[];                              
                 errormessage.innerHTML = "";
                 for( let i=0; i<5; i++ ){
                     //! använder och klistrar in: Personliga nyckeln, lägger till det användaren skrev in i fältet TITEL och AUTHOR i länken som kommer skickas till servern för att lägga till en bok.
@@ -83,8 +73,9 @@ const noKeyUrl = 'https://www.forverkliga.se/JavaScript/api/crud.php?'; //! "req
                         // messages.innerText += '\n Try# ' + tryNo + ' ' + 
                         errorList.push('Try# ' + tryNo + ' ' + addDataResp.message);
                         tryNo++;
-                            if( tryNo === 5){
+                            if( tryNo === 5 ){
                                 errorList.push('Try# ' + tryNo + ' ' + noSuccess);
+                                tryNo = 1;
                             }; //* if() End
                     }; //* if() End
                     
@@ -97,22 +88,36 @@ const noKeyUrl = 'https://www.forverkliga.se/JavaScript/api/crud.php?'; //! "req
             
             
             logInBtn.addEventListener('click', async event => {
-                myTestKey = logInInput.value
-                const viewBookUrl = noKeyUrl + 'key=' + myTestKey + '&op=select';
-                console.log(viewBookUrl);
-                console.log('key written', logInInput.value)
-                let viewBookSvar = await fetch(viewBookUrl);
-                let viewBookResp = await viewBookSvar.json();
-                console.log('Svar från server efter JOSN konvertering', viewBookResp);
-                let viewBookArray = viewBookResp.data;
-                console.log(viewBookArray);
-                console.log('din nyckel för viewBook', logInInput.value);
-                if(viewBookResp.status === 'success'){
-                    console.log('Success! Welcome user: ', logInInput.value, +'.');
-                    viewBook(viewBookArray)
-                }else{
-                    console.log('Failed to recognise key', viewBookResp.status);
+                let errorList = [];
+                errormessage.innerHTML = "";
+                for( let i=0; i<5; i++ ){
+                    myTestKey = logInInput.value
+                    const viewBookUrl = noKeyUrl + 'key=' + myTestKey + '&op=select';
+                    console.log(viewBookUrl);
+                    console.log('key written', logInInput.value)
+                    let viewBookSvar = await fetch(viewBookUrl);
+                    let viewBookResp = await viewBookSvar.json();
+                    console.log('Svar från server efter JOSN konvertering', viewBookResp);
+                    let viewBookArray = viewBookResp.data;
+                    console.log(viewBookArray);
+                    console.log('din nyckel för viewBook', logInInput.value);
+                        if(viewBookResp.status === 'success'){
+                            console.log('Success! Welcome user: ', logInInput.value, +'.');
+                            viewBook(viewBookArray)
+                            errorList.push('Try# ' + tryNo + ' ' + onViewSuccess);
+                            tryNo = 1;
+                            break;
+                        }else{
+                            console.log('Failed to recognise key', viewBookResp.status);
+                            errorList.push('Try# ' + tryNo + ' ' + viewBookSvar.message);
+                            tryNo++;
+                            if (tryNo === 5) {
+                                errorList.push('Try# ' + tryNo + ' ' + noViewSuccess);
+                                tryNo = 1;
+                            }; //* if() End
+                        };
                 };
+                errorReportingServices(errorList);
             }); //* EventListener loginSection End
 
             function errorReportingServices(listError) {
@@ -195,10 +200,10 @@ const noKeyUrl = 'https://www.forverkliga.se/JavaScript/api/crud.php?'; //! "req
 
     
 
-    function deleteBook(){
+    // function deleteBook(){
 
-    };
-    function editBook(){
+    // };
+    // function editBook(){
         
-    };
+    // };
 
