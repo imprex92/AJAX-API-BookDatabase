@@ -1,0 +1,164 @@
+/* "better-comments.tags": [
+  {
+    "tag": "!",
+    "color": "#FF2D00",
+    "strikethrough": false,
+    "backgroundColor": "transparent"
+  },
+  {
+    "tag": "?",
+    "color": "#3498DB",
+    "strikethrough": false,
+    "backgroundColor": "transparent"
+  },
+  {
+    "tag": "//",
+    "color": "#474747",
+    "strikethrough": true,
+    "backgroundColor": "transparent"
+  },
+  {
+    "tag": "todo",
+    "color": "#FF8C00",
+    "strikethrough": false,
+    "backgroundColor": "transparent"
+  },
+  {
+    "tag": "*",
+    "color": "#98C379",
+    "strikethrough": false,
+    "backgroundColor": "transparent"
+  }
+] */
+#errorReporting{
+
+}
+#messages{
+    border: 2px solid black;
+    height: 50px;
+}
+.deleteButton{    
+    height: 20px;
+    width: 70px;
+}
+.editButton{    
+    height: 20px;
+    width: 70px;
+}
+
+img{
+    object-fit: cover;
+    width: 100%
+}
+body{
+    background-color: rgba(0, 0, 0, 0.5);
+}
+#container{
+    width: 80%;
+    margin: auto;
+    background-color: cadetblue;    
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+                                /* Header Area Beginning */
+#header{
+    align-content: center;
+    align-items: center;
+    text-align: center;
+}
+#header #getKeyLabel{
+    position: relative;
+    margin-left: 5%;
+}
+#header #messages{
+    display: flex;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+    justify-content: flex-start;
+}
+#getKey1{
+    display: flex;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+}
+#logIn{
+    padding: 15px 32px;
+    background-color: powderblue;
+    top: 50%;
+    right: 50%;
+}
+#getKey{
+    padding: 15px 32px;
+    background-color: powderblue;    
+    top: 50%;
+    right: 50%;
+}
+#mainSection form label{
+padding: 0px 20px;
+}
+#mainSection form input{
+    width: 15%;
+}
+form{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 10px 0px 10px;
+}
+#mainSection form button{
+    margin: 10px;
+}
+
+                                /* Header Area End */
+                                /* Booksection Area Beginning */
+
+#bookSection{
+    display: grid;
+    grid-template-columns: repeat(16, 1fr);
+    grid-gap: 12px;
+}
+
+.thisBook{
+    grid-column: span 5;
+    background-color: green;
+    color: white;
+}
+
+@media screen and (max-width: 962px){   /* 3st columner med böcker. Ändra flex columns till flex row */
+
+
+    .thisBook {
+        grid-column: span 2;
+        background-color: green;
+        color: white;
+    }
+}
+
+
+
+
+
+@media screen and (max-width: 700px){   /* 2st columner med böcker. Ändra flex columns till flex row.  */
+    #container{
+        width: 100%;
+        padding: 0;
+        margin: 0;
+    }
+    #bookSection{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        grid-gap: 5px;
+    }
+
+
+    .thisBook {
+        grid-column: span 2;
+        background-color: green;
+        color: white;
+    }
+}
