@@ -155,9 +155,15 @@ const noKeyUrl = 'https://www.forverkliga.se/JavaScript/api/crud.php?'; //! "req
         bookImg.setAttribute('src', 'https://cdn.pixabay.com/photo/2015/10/22/17/28/stack-of-books-1001655_1280.jpg');
         bookImg.setAttribute('alt', 'Book Template');
         createBookDiv.appendChild(bookImg);
-
+        bookBtn();
         //? Tanken här är att lägga in en knapp ti div'en. Ändra och ta bort.
         //! Klar.
+        
+    
+    
+    }; //*1
+    //TODO Lägg till egen bild?  function createAddBookAddPicture(){}
+    function bookBtn(){
         let deleteButton = document.createElement('button');
         let editButton = document.createElement('button');
         deleteButton.className = 'deleteButton';
@@ -168,18 +174,19 @@ const noKeyUrl = 'https://www.forverkliga.se/JavaScript/api/crud.php?'; //! "req
         document.getElementById('bookSection').appendChild(editButton);
         //? behövs quarySelector här innan addEventeListener???
         //? Behövs async på addEventeListener???
-        
+
         deleteButton.addEventListener('click', async e => {
-            deleteBook()
+            let deleteBookUrl = noKeyUrl + 'key=' + myTestKey + '&id=' + viewBookResp.id + '&op=delete';
+            let deleteRequest = await fetch(deleteBookUrl)
+            let deleteRequestResp = await deleteRequest.json()
+            console.log(deleteRequestResp.status)
+            deleteBook(deleteRequestResp)
         }); //* deleteButton addEventeListener end.
         editButton.addEventListener('click', async e => {
+            
             editButton()
         }); //* editButton addEventeListener end.
-    
-    
-    }; //*1
-    //TODO Lägg till egen bild?  function createAddBookAddPicture(){}
-
+    }
     function viewBook(viewBookArray){
         
         viewBookArray.forEach(book => {
@@ -200,9 +207,12 @@ const noKeyUrl = 'https://www.forverkliga.se/JavaScript/api/crud.php?'; //! "req
 
     
 
-    // function deleteBook(){
+    function deleteBook(deleteRequestResp) {
+            console.log(deleteRequestResp.status)
+            if (deleteRequestResp.status === 'success'){
 
-    // };
+            }
+    };
     // function editBook(){
         
     // };
