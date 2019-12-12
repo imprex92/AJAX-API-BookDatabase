@@ -33,6 +33,19 @@
 #errorReporting{
 
 }
+#messages{
+    border: 2px solid black;
+    height: 50px;
+}
+.deleteButton{    
+    height: 20px;
+    width: 70px;
+}
+.editButton{    
+    height: 20px;
+    width: 70px;
+}
+
 img{
     object-fit: cover;
     width: 100%
@@ -57,7 +70,14 @@ body{
     position: relative;
     margin-left: 5%;
 }
-#header span{
+#header #messages{
+    display: flex;
+    align-content: center;
+    align-items: center;
+    text-align: center;
+    justify-content: flex-start;
+}
+#getKey1{
     display: flex;
     align-content: center;
     align-items: center;
@@ -102,21 +122,7 @@ form{
     grid-template-columns: repeat(16, 1fr);
     grid-gap: 12px;
 }
-.book1{
-    grid-column: span 5;
-    background-color: blue;
-    color: white;
-}
-.book2{
-    grid-column: span 5;
-    background-color: green;
-    color: white;
-}
-.book3 {
-    grid-column: span 5;
-    background-color: green;
-    color: white;
-}
+
 .thisBook{
     grid-column: span 5;
     background-color: green;
@@ -124,29 +130,7 @@ form{
 }
 
 @media screen and (max-width: 962px){   /* 3st columner med böcker. Ändra flex columns till flex row */
-    #bookSection {
-        display: grid;
-        grid-template-columns: repeat(4, 1fr);
-        grid-gap: 5px;
-    }
 
-    .book1 {
-        grid-column: span 2;
-        background-color: blue;
-        color: white;
-    }
-
-    .book2 {
-        grid-column: span 2;
-        background-color: green;
-        color: white;
-    }
-
-    .book3 {
-        grid-column: span 2;
-        background-color: green;
-        color: white;
-    }
 
     .thisBook {
         grid-column: span 2;
@@ -170,23 +154,7 @@ form{
         grid-template-columns: repeat(2, 1fr);
         grid-gap: 5px;
     }
-    .book1 {
-        grid-column: span 2;
-        background-color: blue;
-        color: white;
-    }
 
-    .book2 {
-        grid-column: span 2;
-        background-color: green;
-        color: white;
-    }
-
-    .book3 {
-        grid-column: span 2;
-        background-color: green;
-        color: white;
-    }
 
     .thisBook {
         grid-column: span 2;
